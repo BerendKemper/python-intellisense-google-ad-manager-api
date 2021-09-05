@@ -20,7 +20,7 @@ TimeUnit = """MINUTE, HOUR, DAY, WEEK, MONTH, LIFETIME, POD, STREAM, UNKNOWN"""
 TargetWindow = """TOP, BLANK"""
 InventoryStatus = """ACTIVE, INACTIVE, ARCHIVED"""
 ValueSourceType = """PARENT, DIRECTLY_SPECIFIED, UNKNOWN"""
-SmartSizeMode = """UNKNOWN, NONE, SMART_BANNER,DYNAMIC_SIZE"""
+SmartSizeMode = """UNKNOWN, NONE, SMART_BANNER, DYNAMIC_SIZE"""
 
 
 class AdUnitParent():
