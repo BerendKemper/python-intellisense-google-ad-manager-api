@@ -1,10 +1,11 @@
-from typing import Optional, Literal
-from GamGeneral import DateTime
+from typing import Optional
+if (__name__ == "__main__"):
+    from GamGeneral import DateTime
+else:
+    from .GamGeneral import DateTime
 
 
-class Enumerations():
-    OrderStatus: Literal['DRAFT', 'PENDING_APPROVAL', 'APPROVED',
-                         'DISAPPROVED', 'PAUSED', 'CANCELED', 'DELETED', 'UNKNOWN']
+OrderStatus = """DRAFT, PENDING_APPROVAL, APPROVED, DISAPPROVED, PAUSED, CANCELED, DELETED, UNKNOWN"""
 
 
 class Money():
@@ -23,7 +24,7 @@ class Order():
     startDateTime: DateTime
     endDateTime: DateTime
     unlimitedEndDateTime: bool
-    status: Enumerations.OrderStatus
+    status: OrderStatus
     isArchived: bool
     notes: str
     externalOrderId: int

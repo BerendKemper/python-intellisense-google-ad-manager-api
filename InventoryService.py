@@ -1,22 +1,26 @@
-from typing import Optional, Literal
+
+from typing import Optional
 from googleads import ad_manager
-from GamGeneral import DateTime
+if (__name__ == "__main__"):
+    from GamGeneral import DateTime
+else:
+    from .GamGeneral import DateTime
 
 
-class Enumerations():
-    EnvironmentType: Literal['BROWSER', 'VIDEO_PLAYER']
-    AdType: Literal['TEXT', 'IMAGE', 'TEXT_AND_IMAGE']
-    BorderStyle: Literal['DEFAULT', 'NOT_ROUNDED',
-                         'SLIGHTLY_ROUNDED', 'VERY_ROUNDED']
-    FontFamily: Literal['DEFAULT', 'ARIAL',
-                        'TAHOMA', 'GEORGIA', 'TIMES', 'VERDANA']
-    FontSize: Literal['DEFAULT', 'SMALL', 'MEDIUM', 'LARGE']
-    TimeUnit: Literal['MINUTE', 'HOUR', 'DAY', 'WEEK',
-                      'MONTH', 'LIFETIME', 'POD', 'STREAM', 'UNKNOWN']
-    TargetWindow: Literal['TOP', 'BLANK']
-    InventoryStatus: Literal['ACTIVE', 'INACTIVE', 'ARCHIVED']
-    ValueSourceType:  Literal['PARENT', 'DIRECTLY_SPECIFIED', 'UNKNOWN']
-    SmartSizeMode: Literal['UNKNOWN', 'NONE', 'SMART_BANNER', 'DYNAMIC_SIZE']
+class Enum():
+    ...
+
+
+EnvironmentType = """BROWSER, VIDEO_PLAYER"""
+AdType = """TEXT, IMAGE, TEXT_AND_IMAGE"""
+BorderStyle = """DEFAULT, NOT_ROUNDED, SLIGHTLY_ROUNDED, VERY_ROUNDED"""
+FontFamily = """DEFAULT, ARIAL, TAHOMA, GEORGIA, TIMES, VERDANA"""
+FontSize = """DEFAULT, SMALL, MEDIUM, LARGE"""
+TimeUnit = """MINUTE, HOUR, DAY, WEEK, MONTH, LIFETIME, POD, STREAM, UNKNOWN"""
+TargetWindow = """TOP, BLANK"""
+InventoryStatus = """ACTIVE, INACTIVE, ARCHIVED"""
+ValueSourceType = """PARENT, DIRECTLY_SPECIFIED, UNKNOWN"""
+SmartSizeMode = """UNKNOWN, NONE, SMART_BANNER,DYNAMIC_SIZE"""
 
 
 class AdUnitParent():
@@ -33,7 +37,7 @@ class Size():
 
 class AdUnitSize():
     size: list[Size]
-    environmentType: Enumerations.EnvironmentType
+    environmentType: EnvironmentType
     companions: list[Optional['AdUnitSize']]
     fullDisplayString: str
     isAudio: bool
@@ -46,16 +50,16 @@ class AdSenseSettings ():
     backgroundColor: str
     textColor: str
     urlColor: str
-    adType: Enumerations.AdType
-    borderStyle: Enumerations.BorderStyle
-    fontFamily: Enumerations.FontFamily
-    fontSize: Enumerations.FontSize
+    adType: AdType
+    borderStyle: BorderStyle
+    fontFamily: FontFamily
+    fontSize: FontSize
 
 
 class FrequencyCap():
     maxImpressions: int
     numTimeUnits: int
-    timeUnit: Enumerations.TimeUnit
+    timeUnit: TimeUnit
 
 
 class LabelFrequencyCap():
@@ -75,8 +79,8 @@ class AdUnit():
     parentPath: list[AdUnitParent]
     name: str
     description: str
-    targetWindow: Enumerations.TargetWindow
-    status: Enumerations.InventoryStatus
+    targetWindow: TargetWindow
+    status: InventoryStatus
     adUnitCode: str
     adUnitSizes: list[AdUnitSize]
     isInterstitial: bool
@@ -84,7 +88,7 @@ class AdUnit():
     isFluid: bool
     explicitlyTargeted: bool
     adSenseSettings: AdSenseSettings
-    adSenseSettingsSource: Enumerations.ValueSourceType
+    adSenseSettingsSource: ValueSourceType
     appliedLabelFrequencyCaps: list[LabelFrequencyCap]
     effectiveLabelFrequencyCaps: list[LabelFrequencyCap]
     appliedLabels: list[AppliedLabel]
@@ -92,7 +96,7 @@ class AdUnit():
     effectiveTeamIds: list[int]
     appliedTeamIds: list[int]
     lastModifiedDateTime: DateTime
-    smartSizeMode: Enumerations.SmartSizeMode
+    smartSizeMode: SmartSizeMode
     refreshRate: int
     externalSetTopBoxChannelId: str
     isSetTopBoxEnabled: bool
@@ -104,7 +108,7 @@ class String_ValueMapEntry():
     id: str
     name: str
     parentId: str
-    status: Enumerations.InventoryStatus
+    status: InventoryStatus
     lastModifiedDateTime: DateTime
 
 
@@ -128,3 +132,6 @@ class InventoryService():
     def getAdUnitsByStatement() -> AdUnitPage: ...
     def performAdUnitAction() -> UpdateResult: ...
     def updateAdUnits(AdUnits: list[AdUnit]) -> list[AdUnit]: ...
+
+
+# InventoryService().createAdUnits()[0].adUnitSizes[0].environmentType
