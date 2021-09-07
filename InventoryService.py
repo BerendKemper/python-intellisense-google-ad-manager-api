@@ -1,14 +1,9 @@
-
-from typing import Optional
+from typing import Optional, overload
 from googleads import ad_manager
 if (__name__ == "__main__"):
-    from GamGeneral import DateTime
+    from Global import DateTime
 else:
-    from .GamGeneral import DateTime
-
-
-class Enum():
-    ...
+    from .Global import DateTime
 
 
 EnvironmentType = """BROWSER, VIDEO_PLAYER"""
@@ -102,14 +97,7 @@ class AdUnit():
     isSetTopBoxEnabled: bool
 
 
-class String_ValueMapEntry():
-    # don't know how to apply this into the Statement class yet
-    adUnitCode: str
-    id: str
-    name: str
-    parentId: str
-    status: InventoryStatus
-    lastModifiedDateTime: DateTime
+AdUnits = list[AdUnit]
 
 
 class Statement(ad_manager.FilterStatement):
@@ -127,11 +115,66 @@ class UpdateResult():
 
 
 class InventoryService():
-    def createAdUnits(AdUnits: list[AdUnit]) -> list[AdUnit]: ...
-    def getAdUnitSizesByStatement(Statement: Statement) -> AdUnitPage: ...
-    def getAdUnitsByStatement() -> AdUnitPage: ...
-    def performAdUnitAction() -> UpdateResult: ...
-    def updateAdUnits(AdUnits: list[AdUnit]) -> list[AdUnit]: ...
+    def createAdUnits(AdUnits: list[AdUnit]) -> AdUnits: ...
 
+    @overload
+    def getAdUnitSizesByStatement(self, filterStatement=Statement(
+        'WHERE adUnitCode = :adUnitCode')) -> AdUnitPage: ...
 
-# InventoryService().createAdUnits()[0].adUnitSizes[0].environmentType
+    @overload
+    def getAdUnitSizesByStatement(self, filterStatement=Statement(
+        'WHERE id = :id')) -> AdUnitPage: ...
+
+    @overload
+    def getAdUnitSizesByStatement(self, filterStatement=Statement(
+        'WHERE name = :name')) -> AdUnitPage: ...
+
+    @overload
+    def getAdUnitSizesByStatement(self, filterStatement=Statement(
+        'WHERE status = :status')) -> AdUnitPage: ...
+
+    @overload
+    def getAdUnitSizesByStatement(self, filterStatement=Statement(
+        'WHERE lastModifiedDateTime = :lastModifiedDateTime')) -> AdUnitPage: ...
+
+    @overload
+    def getAdUnitsByStatement(self, filterStatement=Statement(
+        'WHERE adUnitCode = :adUnitCode')) -> AdUnitPage: ...
+
+    @overload
+    def getAdUnitsByStatement(self, filterStatement=Statement(
+        'WHERE id = :id')) -> AdUnitPage: ...
+
+    @overload
+    def getAdUnitsByStatement(self, filterStatement=Statement(
+        'WHERE name = :name')) -> AdUnitPage: ...
+
+    @overload
+    def getAdUnitsByStatement(self, filterStatement=Statement(
+        'WHERE status = :status')) -> AdUnitPage: ...
+
+    @overload
+    def getAdUnitsByStatement(self,  filterStatement=Statement(
+        'WHERE lastModifiedDateTime = :lastModifiedDateTime')) -> AdUnitPage: ...
+
+    @overload
+    def performAdUnitAction(self, adUnitAction, filterStatement=Statement(
+        'WHERE adUnitCode = :adUnitCode')) -> UpdateResult: ...
+
+    @overload
+    def performAdUnitAction(self, adUnitAction, filterStatement=Statement(
+        'WHERE id = :id')) -> UpdateResult: ...
+
+    @overload
+    def performAdUnitAction(self, adUnitAction, filterStatement=Statement(
+        'WHERE name = :name')) -> UpdateResult: ...
+
+    @overload
+    def performAdUnitAction(self, adUnitAction, filterStatement=Statement(
+        'WHERE status = :status')) -> UpdateResult: ...
+
+    @overload
+    def performAdUnitAction(self, adUnitAction, filterStatement=Statement(
+        'WHERE lastModifiedDateTime = :lastModifiedDateTime')) -> UpdateResult: ...
+
+    def updateAdUnits(AdUnits: AdUnits) -> AdUnits: ...

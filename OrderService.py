@@ -1,8 +1,8 @@
 from typing import Optional
 if (__name__ == "__main__"):
-    from GamGeneral import DateTime
+    from Global import DateTime
 else:
-    from .GamGeneral import DateTime
+    from .Global import DateTime
 
 
 OrderStatus = """DRAFT, PENDING_APPROVAL, APPROVED, DISAPPROVED, PAUSED, CANCELED, DELETED, UNKNOWN"""
@@ -52,5 +52,8 @@ class Order():
     # customFieldValues: list[BaseCustomFieldValue] # https://developers.google.com/ad-manager/api/reference/v202105/OrderService.Order
 
 
+Orders = list[Order]
+
+
 class OrderService():
-    def createOrders(orders: list[Order]) -> list[Order]: ...
+    def createOrders(orders: Orders) -> Orders: ...
