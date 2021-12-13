@@ -16,9 +16,6 @@ class ActivityGroup():
 
 ActivityGroups = list[ActivityGroup]
 
-where_id = """WHERE id = :id"""
-where_name = """WHERE name = :name"""
-
 
 class StatementValueStr():
     xsi_type: str
@@ -31,24 +28,7 @@ class StatementValue():
 
 
 class Statement(ad_manager.FilterStatement):
-    @overload
-    def __init__(self, where_clause='WHERE id = :id',
-                 values=list[dict], limit=int, offset=int) -> ad_manager.FilterStatement: ...
-
-    @overload
-    def __init__(self, where_clause='WHERE name = :name',
-                 values=list[int], limit=int, offset=int) -> ad_manager.FilterStatement: ...
-
-    # @overload
-    # def __init__(
-    #     self, where_clause="WHERE impressionsLookback = :impressionsLookback", values=None): ...
-
-    # @overload
-    # def __init__(
-    #     self, where_clause="WHERE clicksLookback = :clicksLookback", values=None): ...
-
-    # @overload
-    # def __init__(self, where_clause="WHERE status = :status", values=None): ...
+    ...
 
 
 Statement("")
@@ -63,11 +43,9 @@ class ActivityGroupPage():
 
 class ActivityGroupService():
     def createActivityGroups(
-        activityGroups: ActivityGroups) -> ActivityGroups: ...
+        self, activityGroups: ActivityGroups) -> ActivityGroups: ...
 
-    def getActivityGroupsByStatement() -> ActivityGroupPage: ...
+    def getActivityGroupsByStatement(Statement) -> ActivityGroupPage: ...
 
     def updateActivityGroups(
-        activityGroups: ActivityGroups) -> ActivityGroups: ...
-
-# ActivityGroupService.createActivityGroups([])
+        self, activityGroups: ActivityGroups) -> ActivityGroups: ...
